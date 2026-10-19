@@ -342,6 +342,21 @@
     .project h3 { font-family: var(--display); font-weight: 700; font-size: 1.4rem; line-height: 1.2; margin: 0; }
     .where { margin: 2px 0 0; color: var(--muted); font-size: 0.93rem; }
     .summary { margin: 0; }
+    .project > p, .agent-text > p { margin: 0; max-width: 62ch; }
+    .prs { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; max-width: 820px; }
+    .pr {
+      display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; align-items: baseline;
+      padding: 14px 16px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface);
+      color: var(--ink); text-decoration: none; transition: border-color 0.15s;
+    }
+    .pr:hover { border-color: var(--accent); }
+    .pr-repo { font-weight: 600; color: var(--accent); overflow-wrap: anywhere; }
+    .pr-num { color: var(--muted); font-weight: 400; }
+    .pr-title { grid-column: 1 / -1; font-size: 0.95rem; overflow-wrap: anywhere; }
+    .pr-status { font-size: 0.82rem; font-weight: 600; white-space: nowrap; }
+    .pr-status.merged { color: var(--ok); }
+    .pr-status.open { color: var(--warn); }
+    .oss-count { margin: 0 0 12px; font-weight: 600; }
     .card-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: auto; padding-top: 4px; }
     .expand {
       display: inline-flex; align-items: center; gap: 6px;
@@ -535,11 +550,12 @@
     <nav class="wrap nav-inner" aria-label="Primary">
       <a class="brand" href="#top" aria-label="Anmol Srivastava, back to top">AS</a>
       <ul class="nav-links" id="nav-links">
-        <li><a href="#work">Work</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#learning">Learning</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#github">GitHub</a></li>
+        <li><a href="#open-source">Open source</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#learning">Learning</a></li>
+        <li><a href="#work">Work</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
       <div class="nav-tools">
@@ -611,119 +627,70 @@
       </div>
     </section>
 
-    <!-- ================= WORK ================= -->
-    <section class="section" id="work" aria-labelledby="work-title">
+    <!-- ================= SKILLS ================= -->
+    <section class="section" id="skills" aria-labelledby="skills-title">
       <div class="wrap">
-        <h2 id="work-title" class="reveal">Selected work</h2>
-        <p class="intro reveal">Three systems, built end to end. Open any card for the full case study.</p>
-
-        <div class="projects">
-          <!-- Project 1 -->
-          <article class="card project reveal" aria-labelledby="p1-title">
-            <div>
-              <h3 id="p1-title">OCR-KYC pipeline</h3>
-              <p class="where">At Scalean Technologies</p>
-            </div>
-            <p class="summary">Turns identity documents into structured records (name, date of birth, address) in 1–2 seconds per document.</p>
-            <ul class="chips" aria-label="Tech stack">
-              <li>PaddleOCR</li><li>CUDA</li><li>FastAPI</li><li>PostgreSQL</li><li>TypeScript</li><li>Twilio OTP</li>
+        <h2 id="skills-title" class="reveal">Skills</h2>
+        <p class="intro reveal">The tools I reach for, grouped by where they sit in a system.</p>
+        <div class="skills">
+          <div class="skill-group reveal">
+            <h3>AI &amp; LLMs</h3>
+            <ul class="chips">
+              <li>LLM integration</li><li>RAG</li><li>Embeddings</li><li>Semantic search</li><li>Agents</li><li>PyTorch</li><li>Hugging Face</li><li>Sentence-Transformers</li><li>ChromaDB</li><li>pgvector</li><li>PaddleOCR</li><li>n8n</li><li>Groq</li><li>Gemini API</li>
             </ul>
-            <div class="card-actions">
-              <button class="expand" type="button" aria-expanded="false" aria-controls="cs-1">
-                <span class="label">Read case study</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-              </button>
-            </div>
-            <div class="case" id="cs-1" hidden>
-              <dl>
-                <div><dt>Problem</dt><dd>Reading identity documents by hand is slow and error-prone.</dd></div>
-                <div><dt>What I built</dt><dd>A GPU-accelerated OCR pipeline that turns ID documents into structured records: name, date of birth and address.</dd></div>
-                <div><dt>How it works</dt><dd>I benchmarked Tesseract, EasyOCR and PaddleOCR, then chose PaddleOCR on GPU with the model loaded in memory. A FastAPI backend handles files asynchronously and validates input. Regex and bounding-box line grouping pull out each field. A TypeScript frontend shows a live image preview, confidence scores and results in real time. Sign-in uses OTP and blocks brute-force attempts.</dd></div>
-                <div><dt>Result</dt><dd>1–2 seconds per document.</dd></div>
-              </dl>
-            </div>
-          </article>
-
-          <!-- Project 2 -->
-          <article class="card project reveal" aria-labelledby="p2-title">
-            <div>
-              <h3 id="p2-title">After Plan</h3>
-              <p class="where">At Scalean Technologies</p>
-            </div>
-            <p class="summary">A guided five-step onboarding app, moved from a layered monolith to four services behind an API gateway.</p>
-            <ul class="chips" aria-label="Tech stack">
-              <li>React</li><li>FastAPI</li><li>SQLAlchemy</li><li>PostgreSQL</li><li>JWT</li><li>Microservices</li><li>Consul</li>
+          </div>
+          <div class="skill-group reveal">
+            <h3>Backend</h3>
+            <ul class="chips">
+              <li>Python</li><li>FastAPI</li><li>Async Python</li><li>REST API design</li><li>PostgreSQL</li><li>Redis</li><li>SQLAlchemy</li><li>JWT</li><li>Rate limiting</li><li>API versioning</li><li>Microservices</li>
             </ul>
-            <div class="card-actions">
-              <button class="expand" type="button" aria-expanded="false" aria-controls="cs-2">
-                <span class="label">Read case study</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-              </button>
-            </div>
-            <div class="case" id="cs-2" hidden>
-              <dl>
-                <div><dt>Problem</dt><dd>Onboarding needed a guided flow, and a backend that could scale one service at a time.</dd></div>
-                <div><dt>What I built</dt><dd>A full-stack onboarding app with a five-step wizard. It started as a layered monolith, then I split it into four services behind an API gateway.</dd></div>
-                <div><dt>How it works</dt><dd>FastAPI services with SQLAlchemy, JWT auth, rate limiting and API versioning. Consul handles service discovery. React runs the frontend.</dd></div>
-                <div><dt>Result</dt><dd>Each service can be built, deployed and scaled on its own, and the frontend talks to one gateway instead of four separate backends.</dd></div>
-              </dl>
-            </div>
-          </article>
-
-          <!-- Project 3: with simulation -->
-          <article class="card project agent reveal" aria-labelledby="p3-title">
-            <div class="agent-grid">
-              <div class="agent-text">
-                <div>
-                  <h3 id="p3-title">Instagram DM agent</h3>
-                  <p class="where">Personal project</p>
-                </div>
-                <p class="summary">An n8n agent that answers my Instagram DMs in my own texting style, and pings my phone when a message needs me. It has handled 1,000+ DMs.</p>
-                <ul class="chips" aria-label="Tech stack">
-                  <li>n8n</li><li>AI agents</li><li>Pushover</li><li>Human-in-the-loop</li>
-                </ul>
-                <div class="card-actions">
-                  <button class="expand" type="button" aria-expanded="false" aria-controls="cs-3">
-                    <span class="label">Read case study</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-                  </button>
-                  <a class="post-link" href="https://www.linkedin.com/posts/anmolsrivastavaaaa_n8n-aiagents-automation-activity-7515506624262770688-I0cz" target="_blank" rel="noopener">Read the post<span class="sr-only"> on LinkedIn (opens in a new tab)</span></a>
-                </div>
-                <div class="case" id="cs-3" hidden>
-                  <dl>
-                    <div><dt>Problem</dt><dd>Replying to every Instagram DM takes time, but a bot that answers everything on its own will eventually say the wrong thing.</dd></div>
-                    <div><dt>What I built</dt><dd>An n8n AI agent that replies to my Instagram DMs in my own short, casual texting style.</dd></div>
-                    <div><dt>How it works</dt><dd>The agent handles everyday messages itself. When a question is tough, sensitive or needs me personally, it doesn't guess. It sends a Pushover notification to my phone and I step in on Instagram myself.</dd></div>
-                    <div><dt>Result</dt><dd>Handled 1,000+ DMs.</dd></div>
-                  </dl>
-                </div>
-              </div>
-
-              <div class="sim" role="group" aria-labelledby="sim-title">
-                <div class="sim-head">
-                  <p class="sim-title" id="sim-title">Try the agent</p>
-                  <span class="badge badge-sim">Simulation</span>
-                </div>
-                <p class="sim-note">Simple keyword rules running in your browser. Nothing is sent anywhere.</p>
-                <div class="chat" id="chat" role="log" aria-live="polite" aria-label="Simulated DM conversation">
-                  <p class="chat-empty">Pick a sample DM below or write your own.</p>
-                </div>
-                <div class="samples" role="group" aria-label="Sample DMs">
-                  <button class="sample" type="button">hey, what's up?</button>
-                  <button class="sample" type="button">how did you build this dm bot?</button>
-                  <button class="sample" type="button">what stack do you use?</button>
-                  <button class="sample" type="button">can we get on a call about a job?</button>
-                  <button class="sample" type="button">having a rough week, can we talk?</button>
-                </div>
-                <form class="sim-form" id="sim-form">
-                  <label class="sr-only" for="sim-input">Write a DM</label>
-                  <input id="sim-input" type="text" maxlength="160" autocomplete="off" placeholder="Write a DM">
-                  <button type="submit">Send</button>
-                </form>
-              </div>
-            </div>
-          </article>
+          </div>
+          <div class="skill-group reveal">
+            <h3>Frontend</h3>
+            <ul class="chips">
+              <li>React</li><li>TypeScript</li><li>JavaScript</li><li>Next.js</li><li>HTML</li><li>CSS</li>
+            </ul>
+          </div>
+          <div class="skill-group reveal">
+            <h3>Cloud &amp; DevOps</h3>
+            <ul class="chips">
+              <li>AWS ECS</li><li>Bitbucket Pipelines</li><li>Sentry</li><li>Git</li><li>GitHub</li><li>Render</li><li>Railway</li>
+            </ul>
+          </div>
+          <div class="skill-group reveal">
+            <h3>Also</h3>
+            <ul class="chips"><li>Java</li><li>R</li></ul>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ================= GITHUB ================= -->
+    <section class="section" id="github" aria-labelledby="gh-title">
+      <div class="wrap">
+        <h2 id="gh-title" class="reveal">On GitHub</h2>
+        <p class="intro reveal">Live from the GitHub API and refreshed every hour.</p>
+        <div class="gh reveal">
+          <div>
+            <h3>Recently updated repos</h3>
+            <div id="gh-repos"><p class="gh-status">Loading repositories…</p></div>
+          </div>
+          <div class="panel">
+            <h3>Top languages</h3>
+            <div id="gh-langs"><p class="gh-status">Loading…</p></div>
+            <p class="gh-note">Counted by the main language of each public repo.</p>
+          </div>
+        </div>
+        <noscript><p class="gh-status">Turn on JavaScript to see live repos, or browse them on <a href="https://github.com/AnmolSrivastavaaaa">GitHub</a>.</p></noscript>
+      </div>
+    </section>
+
+    <!-- ================= OPEN SOURCE ================= -->
+    <section class="section" id="open-source" aria-labelledby="oss-title">
+      <div class="wrap">
+        <h2 id="oss-title" class="reveal">Open source contributions</h2>
+        <p class="intro reveal">Pull requests to projects I use, merged and in review. Pulled live from GitHub.</p>
+        <div id="oss-list" class="reveal"><p class="gh-status">Loading pull requests…</p></div>
       </div>
     </section>
 
@@ -814,61 +781,73 @@
       </div>
     </section>
 
-    <!-- ================= SKILLS ================= -->
-    <section class="section" id="skills" aria-labelledby="skills-title">
+    <!-- ================= WORK ================= -->
+    <section class="section" id="work" aria-labelledby="work-title">
       <div class="wrap">
-        <h2 id="skills-title" class="reveal">Skills</h2>
-        <p class="intro reveal">The tools I reach for, grouped by where they sit in a system.</p>
-        <div class="skills">
-          <div class="skill-group reveal">
-            <h3>AI &amp; LLMs</h3>
-            <ul class="chips">
-              <li>LLM integration</li><li>RAG</li><li>Embeddings</li><li>Semantic search</li><li>Agents</li><li>PyTorch</li><li>Hugging Face</li><li>Sentence-Transformers</li><li>ChromaDB</li><li>pgvector</li><li>PaddleOCR</li><li>n8n</li><li>Groq</li><li>Gemini API</li>
-            </ul>
-          </div>
-          <div class="skill-group reveal">
-            <h3>Backend</h3>
-            <ul class="chips">
-              <li>Python</li><li>FastAPI</li><li>Async Python</li><li>REST API design</li><li>PostgreSQL</li><li>Redis</li><li>SQLAlchemy</li><li>JWT</li><li>Rate limiting</li><li>API versioning</li><li>Microservices</li>
-            </ul>
-          </div>
-          <div class="skill-group reveal">
-            <h3>Frontend</h3>
-            <ul class="chips">
-              <li>React</li><li>TypeScript</li><li>JavaScript</li><li>Next.js</li><li>HTML</li><li>CSS</li>
-            </ul>
-          </div>
-          <div class="skill-group reveal">
-            <h3>Cloud &amp; DevOps</h3>
-            <ul class="chips">
-              <li>AWS ECS</li><li>Bitbucket Pipelines</li><li>Sentry</li><li>Git</li><li>GitHub</li><li>Render</li><li>Railway</li>
-            </ul>
-          </div>
-          <div class="skill-group reveal">
-            <h3>Also</h3>
-            <ul class="chips"><li>Java</li><li>R</li></ul>
-          </div>
-        </div>
-      </div>
-    </section>
+        <h2 id="work-title" class="reveal">Selected work</h2>
+        <p class="intro reveal">Three things I built end to end, and what each one taught me.</p>
 
-    <!-- ================= GITHUB ================= -->
-    <section class="section" id="github" aria-labelledby="gh-title">
-      <div class="wrap">
-        <h2 id="gh-title" class="reveal">On GitHub</h2>
-        <p class="intro reveal">Live from the GitHub API and refreshed every hour.</p>
-        <div class="gh reveal">
-          <div>
-            <h3>Recently updated repos</h3>
-            <div id="gh-repos"><p class="gh-status">Loading repositories…</p></div>
-          </div>
-          <div class="panel">
-            <h3>Top languages</h3>
-            <div id="gh-langs"><p class="gh-status">Loading…</p></div>
-            <p class="gh-note">Counted by the main language of each public repo.</p>
-          </div>
+        <div class="projects">
+          <article class="card project reveal" aria-labelledby="p1-title">
+            <div>
+              <h3 id="p1-title">OCR-KYC pipeline</h3>
+              <p class="where">At Scalean Technologies</p>
+            </div>
+            <p>Checking ID documents by hand is slow, and people make typing mistakes. So I built a pipeline that takes a photo of an ID and pulls out the name, date of birth and address as clean, structured data. It runs PaddleOCR on a GPU behind a FastAPI backend. A TypeScript frontend shows the image, the fields it found, and how confident the model is about each one. Sign-in uses one-time passwords and blocks brute-force attempts.</p>
+            <p>Before writing the pipeline, I tested three OCR engines (Tesseract, EasyOCR and PaddleOCR) on the same documents. That taught me to choose tools by measuring them, not by guessing. The biggest speed-up was simple: load the model into memory once instead of on every request. That brought each document down to 1–2 seconds. I also learned that OCR gives you raw text, not answers. A lot of the work was grouping lines by where they sit on the page and using regex to find each field.</p>
+            <ul class="chips" aria-label="Tech stack"><li>PaddleOCR</li><li>CUDA</li><li>FastAPI</li><li>PostgreSQL</li><li>TypeScript</li><li>Twilio OTP</li></ul>
+          </article>
+
+          <article class="card project reveal" aria-labelledby="p2-title">
+            <div>
+              <h3 id="p2-title">After Plan</h3>
+              <p class="where">At Scalean Technologies</p>
+            </div>
+            <p>After Plan is an onboarding app I built from scratch. New users go through a five-step wizard in React, backed by FastAPI and PostgreSQL. I first built it as one layered app, where routes call services, services call repositories, and repositories talk to the database. Later I split it into four services (Auth, Party, Account and Submission) behind an API gateway, with Consul so the services can find each other.</p>
+            <p>This project taught me why you would split an app into services, and what that costs. With four services instead of one, I had to think about how services discover each other, how the gateway checks every request, and the difference between proving who someone is (authentication) and deciding what they are allowed to do (authorization). I came out of it understanding JWT, rate limiting and API versioning properly, not just copying them from a tutorial.</p>
+            <ul class="chips" aria-label="Tech stack"><li>React</li><li>FastAPI</li><li>SQLAlchemy</li><li>PostgreSQL</li><li>JWT</li><li>Microservices</li><li>Consul</li></ul>
+          </article>
+
+          <article class="card project agent reveal" aria-labelledby="p3-title">
+            <div class="agent-grid">
+              <div class="agent-text">
+                <div>
+                  <h3 id="p3-title">Instagram DM agent</h3>
+                  <p class="where">Personal project</p>
+                </div>
+                <p>Replying to every Instagram DM takes time, so I built an n8n agent that answers them for me in my own short, casual texting style. It has handled 1,000+ DMs.</p>
+                <p>Getting the bot to reply was the easy part. The hard part was teaching it when not to. A bot that answers everything will eventually say the wrong thing, so when a message is tough, sensitive or needs me personally, the agent does not guess. It sends a Pushover alert to my phone and I reply on Instagram myself. Building it showed me that a good AI product is mostly about deciding where the human steps in. Try the simulation to see it work.</p>
+                <ul class="chips" aria-label="Tech stack"><li>n8n</li><li>AI agents</li><li>Pushover</li><li>Human-in-the-loop</li></ul>
+                <div class="card-actions">
+                  <a class="post-link" href="https://www.linkedin.com/posts/anmolsrivastavaaaa_n8n-aiagents-automation-activity-7515506624262770688-I0cz" target="_blank" rel="noopener">Read the post<span class="sr-only"> on LinkedIn (opens in a new tab)</span></a>
+                </div>
+              </div>
+
+              <div class="sim" role="group" aria-labelledby="sim-title">
+                <div class="sim-head">
+                  <p class="sim-title" id="sim-title">Try the agent</p>
+                  <span class="badge badge-sim">Simulation</span>
+                </div>
+                <p class="sim-note">Simple keyword rules running in your browser. Nothing is sent anywhere.</p>
+                <div class="chat" id="chat" role="log" aria-live="polite" aria-label="Simulated DM conversation">
+                  <p class="chat-empty">Pick a sample DM below or write your own.</p>
+                </div>
+                <div class="samples" role="group" aria-label="Sample DMs">
+                  <button class="sample" type="button">hey, what's up?</button>
+                  <button class="sample" type="button">how did you build this dm bot?</button>
+                  <button class="sample" type="button">what stack do you use?</button>
+                  <button class="sample" type="button">can we get on a call about a job?</button>
+                  <button class="sample" type="button">having a rough week, can we talk?</button>
+                </div>
+                <form class="sim-form" id="sim-form">
+                  <label class="sr-only" for="sim-input">Write a DM</label>
+                  <input id="sim-input" type="text" maxlength="160" autocomplete="off" placeholder="Write a DM">
+                  <button type="submit">Send</button>
+                </form>
+              </div>
+            </div>
+          </article>
         </div>
-        <noscript><p class="gh-status">Turn on JavaScript to see live repos, or browse them on <a href="https://github.com/AnmolSrivastavaaaa">GitHub</a>.</p></noscript>
       </div>
     </section>
 
@@ -1231,7 +1210,7 @@
     simForm.addEventListener('submit', function (e) { e.preventDefault(); runSim(simInput.value); simInput.value = ''; });
 
     /* ---------- Live GitHub ---------- */
-    var GH_USER = 'AnmolSrivastavaaaa', GH_KEY = 'gh-cache-v1', GH_TTL = 3600 * 1000;
+    var GH_USER = 'AnmolSrivastavaaaa', GH_KEY = 'gh-cache-v2', GH_TTL = 3600 * 1000;
     var ghRepos = $('#gh-repos'), ghLangs = $('#gh-langs');
     function ghFail() {
       ghRepos.innerHTML = '';
@@ -1292,7 +1271,7 @@
       fetch('https://api.github.com/users/' + GH_USER + '/repos?per_page=100&sort=pushed', { headers: { Accept: 'application/vnd.github+json' } })
         .then(function (r) { if (!r.ok) throw new Error('GitHub ' + r.status); return r.json(); })
         .then(function (j) {
-          var repos = j.filter(function (x) { return !x.fork; }).map(function (x) {
+          var repos = j.filter(function (x) { return !x.fork && x.name.toLowerCase() !== (GH_USER + '.github.io').toLowerCase(); }).map(function (x) {
             return { n: x.name, d: x.description, u: x.html_url, l: x.language, s: x.stargazers_count, p: x.pushed_at };
           });
           store.set(GH_KEY, JSON.stringify({ t: Date.now(), repos: repos }));
@@ -1308,14 +1287,81 @@
       gio.observe(ghSection);
     } else { loadGH(); }
 
+    /* ---------- Open source PRs (live) ---------- */
+    var ossBox = $('#oss-list'), OSS_KEY = 'gh-prs-v1';
+    function renderOSS(prs) {
+      ossBox.innerHTML = '';
+      if (!prs.length) {
+        var p = el('p', 'gh-status', "Nothing merged yet. I've just started contributing, beginning with ");
+        [['Switchboard', 'https://github.com/justadityaraj/switchboard-browser-picker'], ['amazon-in-mcp', 'https://github.com/justadityaraj/amazon-in-mcp']].forEach(function (r, i) {
+          var a = el('a', null, r[0]); a.href = r[1]; a.target = '_blank'; a.rel = 'noopener';
+          if (i) p.appendChild(document.createTextNode(' and '));
+          p.appendChild(a);
+        });
+        p.appendChild(document.createTextNode('.'));
+        ossBox.appendChild(p);
+        return;
+      }
+      var merged = prs.filter(function (x) { return x.m; }).length;
+      ossBox.appendChild(el('p', 'oss-count', merged + ' merged' + (prs.length > merged ? ', ' + (prs.length - merged) + ' in review' : '')));
+      var ul = el('ul', 'prs');
+      prs.forEach(function (x) {
+        var li = el('li'), a = el('a', 'pr');
+        a.href = x.u; a.target = '_blank'; a.rel = 'noopener';
+        var repo = el('span', 'pr-repo', x.r + ' ');
+        repo.appendChild(el('span', 'pr-num', '#' + x.n));
+        a.appendChild(repo);
+        var d = new Date(x.m || x.c).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+        a.appendChild(el('span', 'pr-status ' + (x.m ? 'merged' : 'open'), (x.m ? 'Merged ' : 'In review since ') + d));
+        a.appendChild(el('span', 'pr-title', x.t));
+        li.appendChild(a); ul.appendChild(li);
+      });
+      ossBox.appendChild(ul);
+    }
+    function ossFail() {
+      ossBox.innerHTML = '';
+      var p = el('p', 'gh-status', "Couldn't load pull requests right now. ");
+      var a = el('a', null, 'See them on GitHub');
+      a.href = 'https://github.com/pulls?q=is%3Apr+author%3A' + GH_USER + '+-user%3A' + GH_USER;
+      a.target = '_blank'; a.rel = 'noopener';
+      p.appendChild(a); p.appendChild(document.createTextNode('.'));
+      ossBox.appendChild(p);
+    }
+    function loadOSS() {
+      var cached = null;
+      try { cached = JSON.parse(store.get(OSS_KEY) || 'null'); } catch (e) {}
+      if (cached && cached.prs && Date.now() - cached.t < GH_TTL) { renderOSS(cached.prs); return; }
+      if (!window.fetch) { ossFail(); return; }
+      var q = encodeURIComponent('type:pr author:' + GH_USER + ' -user:' + GH_USER);
+      fetch('https://api.github.com/search/issues?q=' + q + '&sort=created&order=desc&per_page=100', { headers: { Accept: 'application/vnd.github+json' } })
+        .then(function (r) { if (!r.ok) throw new Error('GitHub ' + r.status); return r.json(); })
+        .then(function (j) {
+          var prs = (j.items || []).filter(function (x) {
+            return x.pull_request && (x.pull_request.merged_at || x.state === 'open');
+          }).map(function (x) {
+            return { r: x.repository_url.split('/repos/')[1], n: x.number, t: x.title, u: x.html_url, m: x.pull_request.merged_at, c: x.created_at };
+          }).sort(function (a, b) { return new Date(b.m || b.c) - new Date(a.m || a.c); });
+          store.set(OSS_KEY, JSON.stringify({ t: Date.now(), prs: prs }));
+          renderOSS(prs);
+        })
+        .catch(function () { if (cached && cached.prs) renderOSS(cached.prs); else ossFail(); });
+    }
+    if ('IntersectionObserver' in window) {
+      var oio = new IntersectionObserver(function (es) {
+        if (es[0].isIntersecting) { oio.disconnect(); loadOSS(); }
+      }, { rootMargin: '600px 0px' });
+      oio.observe($('#open-source'));
+    } else { loadOSS(); }
+
     /* ---------- Command palette ---------- */
     var pal = $('#palette'), palInput = $('#pal-input'), palList = $('#pal-list'), palEmpty = $('#pal-empty');
     var commands = [
-      { label: 'Go to Work', hint: 'Section', run: function () { goTo('work'); } },
-      { label: 'Go to Experience', hint: 'Section', run: function () { goTo('experience'); } },
-      { label: 'Go to Learning in public', hint: 'Section', run: function () { goTo('learning'); } },
       { label: 'Go to Skills', hint: 'Section', run: function () { goTo('skills'); } },
       { label: 'Go to GitHub activity', hint: 'Section', run: function () { goTo('github'); } },
+      { label: 'Go to Open source contributions', hint: 'Section', run: function () { goTo('open-source'); } },
+      { label: 'Go to Experience', hint: 'Section', run: function () { goTo('experience'); } },
+      { label: 'Go to Learning in public', hint: 'Section', run: function () { goTo('learning'); } },
+      { label: 'Go to Selected work', hint: 'Section', run: function () { goTo('work'); } },
       { label: 'Go to Contact', hint: 'Section', run: function () { goTo('contact'); } },
       { label: 'Copy email', hint: EMAIL, run: copyEmail },
       { label: 'Open GitHub', hint: 'github.com/AnmolSrivastavaaaa', run: function () { openUrl(LINKS.github); } },
