@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anmol Srivastava · AI Forward Deployed Engineer</title>
+  <meta name="description" content="Anmol Srivastava builds LLM systems that work in front of real users: routing, retrieval, OCR, agents, and the backends around them.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F4F6F8;
+      --ink: #17202A;
+      --muted: #5B6672;
+      --line: #D6DCE3;
+      --accent: #1F5EFF;
+      --accent-soft: #E3EAFF;
+      --display: "Bricolage Grotesque", system-ui, sans-serif;
+      --body: "IBM Plex Sans", system-ui, sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #12171D;
+        --ink: #E8ECF1;
+        --muted: #98A3AF;
+        --line: #2A333D;
+        --accent: #7C9BFF;
+        --accent-soft: #1C2540;
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 17px;
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+    /* Hero */
+    header.hero { padding: 96px 0 72px; }
+    .hero .name { font-weight: 500; color: var(--muted); margin: 0 0 20px; }
+    .hero h1 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(2.6rem, 8vw, 4.6rem);
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      margin: 0 0 28px;
+    }
+    .hero .lede { font-size: 1.2rem; max-width: 34em; margin: 0 0 32px; }
+    .hero .links { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; padding: 0; list-style: none; }
+    .hero .links a {
+      display: inline-block;
+      padding: 9px 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .hero .links a:hover { border-color: var(--accent); color: var(--accent); }
+    .hero .links a.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    @media (prefers-color-scheme: dark) { .hero .links a.primary { color: #0E1320; } }
+
+    /* Sections */
+    section { padding: 56px 0; border-top: 1px solid var(--line); }
+    section h2 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1.75rem;
+      letter-spacing: -0.01em;
+      margin: 0 0 8px;
+    }
+    section .intro { color: var(--muted); margin: 0 0 32px; max-width: 36em; }
+
+    /* Projects */
+    .project { padding: 24px 0; border-bottom: 1px solid var(--line); }
+    .project:last-child { border-bottom: 0; }
+    .project h3 {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: 1.35rem;
+      margin: 0 0 6px;
+    }
+    .project h3 a { color: var(--ink); text-decoration: none; }
+    .project h3 a:hover { color: var(--accent); text-decoration: underline; }
+    .project p { margin: 0 0 12px; max-width: 38em; }
+    .project .where { color: var(--muted); font-weight: 400; font-size: 0.95rem; margin-left: 8px; font-family: var(--body); }
+    .stack { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+    .stack li {
+      font-size: 0.82rem;
+      padding: 2px 10px;
+      border-radius: 6px;
+      background: var(--accent-soft);
+      color: var(--ink);
+    }
+
+    /* Learning log: a real timeline, newest first */
+    .log { list-style: none; margin: 0; padding: 0; }
+    .log li {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 16px;
+      padding: 14px 0;
+    }
+    .log time { color: var(--muted); font-size: 0.95rem; }
+    .log p { margin: 0; }
+
+    /* Experience & skills */
+    .rows { display: grid; gap: 20px; }
+    .row h3 { font-size: 1.05rem; font-weight: 600; margin: 0; }
+    .row .meta { color: var(--muted); margin: 0 0 4px; font-size: 0.95rem; }
+    .row p { margin: 0; }
+    .skills { display: grid; grid-template-columns: 150px 1fr; gap: 10px 20px; margin: 0; }
+    .skills dt { font-weight: 600; }
+    .skills dd { margin: 0; color: var(--muted); }
+
+    footer { padding: 56px 0 80px; border-top: 1px solid var(--line); }
+    footer h2 { font-family: var(--display); font-size: 1.75rem; margin: 0 0 8px; }
+    footer p { margin: 0 0 20px; max-width: 34em; }
+
+    @media (max-width: 560px) {
+      header.hero { padding: 64px 0 48px; }
+      .log li, .skills { grid-template-columns: 1fr; gap: 2px; }
+      .skills dd { margin-bottom: 10px; }
+      .project .where { display: block; margin: 2px 0 0; }
+    }
+
+    /* One page-load moment: the headline settles in. Nothing else moves. */
+    @media (prefers-reduced-motion: no-preference) {
+      .hero h1 { animation: settle 700ms cubic-bezier(.2,.7,.2,1) both; }
+      @keyframes settle { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero wrap">
+    <p class="name">Anmol Srivastava, Delhi</p>
+    <h1>I put LLM systems in front of real users and keep them working.</h1>
+    <p class="lede">
+      AI forward deployed engineer. I build the whole path from a messy business problem to a running system:
+      model routing, retrieval over private documents, OCR pipelines, agents, and the FastAPI backends that hold it together.
+    </p>
+    <ul class="links">
+      <li><a class="primary" href="https://github.com/AnmolSrivastavaaaa">GitHub</a></li>
+      <!-- TODO: replace with your LinkedIn profile URL -->
+      <li><a href="https://www.linkedin.com/in/YOUR-LINKEDIN/">LinkedIn</a></li>
+      <!-- TODO: replace with your email -->
+      <li><a href="mailto:you@example.com">Email me</a></li>
+      <!-- TODO: put resume.pdf in the repo root, or delete this line -->
+      <li><a href="resume.pdf">Resume</a></li>
+    </ul>
+  </header>
+
+  <main class="wrap">
+
+    <!-- ============ PROJECTS ============ -->
+    <!-- To add a project: copy one <article class="project"> block and edit it. -->
+    <section id="work">
+      <h2>What I've built</h2>
+      <p class="intro">Systems that solve a specific problem, built end to end.</p>
+
+      <article class="project">
+        <!-- TODO: point href at the SmartRoute repo -->
+        <h3><a href="https://github.com/AnmolSrivastavaaaa">SmartRoute</a></h3>
+        <p>An LLM gateway that looks at each incoming request and sends it to the model that fits it best, across Groq and Gemini, so simple questions don't pay for heavyweight models.</p>
+        <ul class="stack"><li>FastAPI</li><li>PostgreSQL</li><li>Redis</li><li>React</li><li>TypeScript</li><li>Groq</li><li>Gemini</li></ul>
+      </article>
+
+      <article class="project">
+        <!-- TODO: point href at the SmartDocs repo -->
+        <h3><a href="https://github.com/AnmolSrivastavaaaa">SmartDocs</a></h3>
+        <p>Ask questions of your own documents and get answers grounded in them. Retrieval-augmented generation with the model running locally, so the documents never leave the machine.</p>
+        <ul class="stack"><li>RAG</li><li>ChromaDB</li><li>Sentence-Transformers</li><li>PyTorch</li><li>GPT-2 Medium</li></ul>
+      </article>
+
+      <article class="project">
+        <h3>OCR-KYC pipeline <span class="where">at Scalean Technologies</span></h3>
+        <p>Reads identity documents with GPU-accelerated OCR and turns them into verified records, with OTP sign-in that blocks brute-force attempts.</p>
+        <ul class="stack"><li>PaddleOCR</li><li>CUDA</li><li>FastAPI</li><li>PostgreSQL</li><li>Twilio OTP</li></ul>
+      </article>
+
+      <article class="project">
+        <h3>After Plan <span class="where">at Scalean Technologies</span></h3>
+        <p>A full-stack onboarding app built from scratch with a five-step wizard, first as a layered monolith, then split into four services behind an API gateway with Consul handling service discovery.</p>
+        <ul class="stack"><li>React</li><li>FastAPI</li><li>SQLAlchemy</li><li>JWT</li><li>Microservices</li><li>Consul</li></ul>
+      </article>
+
+      <article class="project">
+        <h3>Instagram DM agent</h3>
+        <p>An n8n agent that answers my Instagram DMs in my own texting style, and calls my phone when a conversation needs a human.</p>
+        <ul class="stack"><li>n8n</li><li>AI agents</li><li>Escalation</li></ul>
+      </article>
+    </section>
+
+    <!-- ============ LEARNING LOG ============ -->
+    <!-- Newest entry on top. Add a new <li> whenever you learn or ship something. -->
+    <section id="learning">
+      <h2>Learning in public</h2>
+      <p class="intro">What I'm working through right now. Updated as I go.</p>
+      <ol class="log" reversed>
+        <li>
+          <time datetime="2026-10">Oct 2026</time>
+          <p>Teaming up with <a href="https://github.com/justadityaraj">Aditya Raj Singh</a> on a Windows version of <a href="https://github.com/justadityaraj/switchboard-browser-picker">Switchboard</a>, an open-source browser picker.</p>
+        </li>
+        <li>
+          <time datetime="2026-10">Oct 2026</time>
+          <p>Building agents, voice agents and automations in n8n.</p>
+        </li>
+        <li>
+          <time datetime="2026-10">Oct 2026</time>
+          <p>Started Ed Donner's LLM engineering course, posting what I learn each day on LinkedIn.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section id="experience">
+      <h2>Experience</h2>
+      <div class="rows">
+        <div class="row">
+          <h3>Backend &amp; AI intern, Scalean Technologies</h3>
+          <!-- TODO: add your dates, e.g. "Remote · Jan – Sep 2026" -->
+          <p class="meta">Remote, Pune</p>
+          <p>Built the OCR-KYC pipeline and the After Plan app, and designed microservice backends with an API gateway, JWT auth and rate limiting.</p>
+        </div>
+        <div class="row">
+          <h3>Frontend intern, XeTech</h3>
+          <p class="meta">Short internship</p>
+          <p>React development.</p>
+        </div>
+        <div class="row">
+          <h3>BCA, AI specialization (in collaboration with IBM)</h3>
+          <p class="meta">United University, Prayagraj, 2026</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section id="skills">
+      <h2>Tools I use</h2>
+      <dl class="skills">
+        <dt>AI &amp; LLMs</dt><dd>RAG, LLM routing, agents, PyTorch, Hugging Face, ChromaDB, PaddleOCR, n8n</dd>
+        <dt>Backend</dt><dd>Python, FastAPI, PostgreSQL, Redis, SQLAlchemy, JWT, microservices</dd>
+        <dt>Frontend</dt><dd>React, TypeScript, JavaScript</dd>
+        <dt>Also</dt><dd>Java, R</dd>
+      </dl>
+    </section>
+
+  </main>
+
+  <!-- ============ CONTACT ============ -->
+  <footer class="wrap">
+    <h2>Have a problem an LLM should solve?</h2>
+    <p>I'm open to AI engineering and forward deployed roles. Tell me what you're trying to build.</p>
+    <!-- TODO: same email as above -->
+    <a href="mailto:you@example.com">you@example.com</a>
+  </footer>
+
+</body>
+</html>
